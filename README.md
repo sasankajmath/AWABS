@@ -1,5 +1,5 @@
-# MiSLAS
-**Improving Calibration for Long-Tailed Recognition**
+# AWABS
+** Long-Tailed Recognition**
 
 **Authors**: Zhisheng Zhong, Jiequan Cui, Shu Liu, Jiaya Jia
 
