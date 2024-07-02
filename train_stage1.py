@@ -20,12 +20,8 @@ import torch.nn.functional as F
 
 from datasets.cifar10 import CIFAR10_LT
 from datasets.cifar100 import CIFAR100_LT
-from datasets.places import Places_LT
-from datasets.imagenet import ImageNet_LT
-from datasets.ina2018 import iNa2018
 
 from models import resnet
-from models import resnet_places
 from models import resnet_cifar
 
 from utils import config, update_config, create_logger
@@ -118,15 +114,6 @@ def main_worker(gpu, ngpus_per_node, config, logger, model_dir):
         model = getattr(resnet_cifar, config.backbone)()
         classifier = getattr(resnet_cifar, 'Classifier')(feat_in=64, num_classes=config.num_classes)
 
-    elif config.dataset == 'imagenet' or config.dataset == 'ina2018':
-        model = getattr(resnet, config.backbone)()
-        classifier = getattr(resnet, 'Classifier')(feat_in=2048, num_classes=config.num_classes)
-
-    elif config.dataset == 'places':
-        model = getattr(resnet_places, config.backbone)(pretrained=True)
-        classifier = getattr(resnet_places, 'Classifier')(feat_in=2048, num_classes=config.num_classes)
-        block = getattr(resnet_places, 'Bottleneck')(2048, 512, groups=1, base_width=64, dilation=1, norm_layer=nn.BatchNorm2d)
-
     if not torch.cuda.is_available():
         logger.info('using CPU, this will be slow')
     elif config.distributed:
@@ -202,17 +189,6 @@ def main_worker(gpu, ngpus_per_node, config, logger, model_dir):
         dataset = CIFAR100_LT(config.distributed, root=config.data_path, imb_factor=config.imb_factor,
                               batch_size=config.batch_size, num_works=config.workers)
 
-    elif config.dataset == 'places':
-        dataset = Places_LT(config.distributed, root=config.data_path,
-                            batch_size=config.batch_size, num_works=config.workers)
-
-    elif config.dataset == 'imagenet':
-        dataset = ImageNet_LT(config.distributed, root=config.data_path,
-                              batch_size=config.batch_size, num_works=config.workers)
-
-    elif config.dataset == 'ina2018':
-        dataset = iNa2018(config.distributed, root=config.data_path,
-                          batch_size=config.batch_size, num_works=config.workers)
     cls_num_list = dataset.cls_num_list
     train_loader = dataset.train_instance
     val_loader = dataset.eval
