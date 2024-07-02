@@ -1,4 +1,4 @@
-name: cifar100_imb002_stage2_mislas
+name: cifar100_imb002_stage2_awabs
 print_freq: 40
 workers: 4
 log_dir: 'logs'
