@@ -18,12 +18,9 @@ import torch.nn.functional as F
 
 from datasets.cifar10 import CIFAR10_LT
 from datasets.cifar100 import CIFAR100_LT
-from datasets.places import Places_LT
-from datasets.imagenet import ImageNet_LT
-from datasets.ina2018 import iNa2018
+
 
 from models import resnet
-from models import resnet_places
 from models import resnet_cifar
 
 from utils import config, update_config, create_logger
@@ -34,7 +31,7 @@ from methods import LearnableWeightScaling
 
 
 def parse_args():
-    parser = argparse.ArgumentParser(description='MiSLAS evaluation')
+    parser = argparse.ArgumentParser(description='AWABS evaluation')
     parser.add_argument('--cfg',
                         help='experiment configure file name',
                         required=True,
@@ -132,17 +129,6 @@ def main_worker(gpu, ngpus_per_node, config, logger, model_dir):
     if config.dataset == 'cifar10' or config.dataset == 'cifar100':
         model = getattr(resnet_cifar, config.backbone)()
         classifier = getattr(resnet_cifar, 'Classifier')(feat_in=64, num_classes=config.num_classes)
-
-    elif config.dataset == 'imagenet' or config.dataset == 'ina2018':
-        model = getattr(resnet, config.backbone)()
-        classifier = getattr(resnet, 'Classifier')(feat_in=2048, num_classes=config.num_classes)
-
-    elif config.dataset == 'places':
-        model = getattr(resnet_places, config.backbone)(pretrained=True)
-        classifier = getattr(resnet_places, 'Classifier')(feat_in=2048, num_classes=config.num_classes)
-        block = getattr(resnet_places, 'Bottleneck')(2048, 512, groups=1,
-                                                     base_width=64, dilation=1,
-                                                     norm_layer=nn.BatchNorm2d)
 
     lws_model = LearnableWeightScaling(num_classes=config.num_classes)
 
