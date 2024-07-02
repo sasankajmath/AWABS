@@ -1,4 +1,4 @@
-name: cifar100_imb0005_stage1_mixup
+name: cifar100_imb0005_stage2_awabs
 print_freq: 40
 workers: 4
 log_dir: 'logs'
@@ -11,7 +11,7 @@ data_path: './data/cifar100'
 num_classes: 100
 imb_factor: 0.005
 backbone: 'resnet32_fe'
-resume: ''
+resume: 'Path/to/Stage1_checkpoint.pth.tar'
 head_class_idx:
   - 0
   - 36
@@ -35,12 +35,15 @@ multiprocessing_distributed: False
 
 
 # Train
-mode: 'stage1'
+mode: 'stage2'
+smooth_head: 0.4
+smooth_tail: 0.1
+shift_bn: True
+lr_factor: 0.2
 lr: 0.1
 batch_size: 128
 weight_decay: 2e-4
-num_epochs: 200
+num_epochs: 10
 momentum: 0.9
-cos: False
-mixup: True
-alpha: 1.0
+mixup: False
+alpha: null
