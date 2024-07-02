@@ -38,7 +38,7 @@ from methods import LabelAwareSmoothing, LearnableWeightScaling
 
 
 def parse_args():
-    parser = argparse.ArgumentParser(description='MiSLAS training (Stage-2)')
+    parser = argparse.ArgumentParser(description='AWABS training (Stage-2)')
     parser.add_argument('--cfg',
                         help='experiment configure file name',
                         required=True,
