@@ -1,0 +1,41 @@
+2024-04-05 15:16:12,033 
+Namespace(cfg='./config/cifar100/cifar100_imb001_stage2_mislas.yaml', opts=['resume', './saved/cifar100_imb001_stage1_mixup_202402181123/ckps/model_best.pth.tar'])
+2024-04-05 15:16:12,033 
+alpha: None
+backbone: resnet32_fe
+batch_size: 128
+cos: False
+data_path: ./data/cifar100
+dataset: cifar100
+deterministic: False
+dist_backend: nccl
+dist_url: tcp://224.66.41.62:23456
+distributed: False
+gpu: None
+head_class_idx: [0, 36]
+imb_factor: 0.01
+log_dir: logs
+lr: 0.1
+lr_factor: 0.2
+med_class_idx: [36, 71]
+mixup: False
+mode: stage2
+model_dir: ckps
+momentum: 0.9
+multiprocessing_distributed: False
+name: cifar100_imb001_stage2_mislas
+num_classes: 100
+num_epochs: 10
+print_freq: 40
+rank: -1
+resume: ./saved/cifar100_imb001_stage1_mixup_202402181123/ckps/model_best.pth.tar
+shift_bn: True
+smooth_head: 0.4
+smooth_tail: 0.1
+tail_class_idx: [71, 100]
+weight_decay: 0.0002
+workers: 4
+world_size: -1
+2024-04-05 15:16:13,060 => loading checkpoint './saved/cifar100_imb001_stage1_mixup_202402181123/ckps/model_best.pth.tar'
+2024-04-05 15:16:13,075 => loaded checkpoint './saved/cifar100_imb001_stage1_mixup_202402181123/ckps/model_best.pth.tar' (epoch 194)
+2024-04-05 15:16:17,297 Epoch: [0][ 0/85]	Time  3.064 ( 3.064)	Loss 2.056 (2.056)	Acc@1 81.250 (81.250)	Acc@5 95.312 (95.312)
