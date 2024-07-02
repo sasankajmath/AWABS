@@ -39,7 +39,7 @@ from balance_softmax import BalancedSoftmaxLoss
 
 
 def parse_args():
-    parser = argparse.ArgumentParser(description='MiSLAS training (Stage-1)')
+    parser = argparse.ArgumentParser(description='AWABS training (Stage-1)')
     parser.add_argument('--cfg',
                         help='experiment configure file name',
                         required=True,
