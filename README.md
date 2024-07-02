@@ -50,8 +50,8 @@ python3 train_stage1.py --cfg ./config/cifar10/cifar10_imb01_stage1_mixup.yaml
 After stage 1: cifar10_imb001_stage1_mixup_202402172100  
 
 Stage 2:
-python3 train_stage2.py --cfg ./config/cifar10/cifar10_imb01_stage2_mislas.yaml resume ./saved/cifar10_imb01_stage1_mixup_202402010007/ckps/model_best.pth.tar
-After stage 2: cifar10_imb01_stage2_awabs_202402010032
+python3 train_stage2.py --cfg ./config/cifar10/cifar10_imb01_stage2_mislas.yaml resume ./saved/cifar10_imb01_stage1_mixup_202402172100/ckps/model_best.pth.tar
+After stage 2: cifar10_imb001_stage2_awabs_202402172130
 ```
 ## Evaluation
 
